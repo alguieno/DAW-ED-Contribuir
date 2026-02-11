@@ -89,7 +89,46 @@ public class BibliotecaServicio {
             System.out.println("No hay préstamos activos.");
         }
     }
-    
+
+    public void buscarLibroAvanzado(ArrayList<String> terminos)
+    {
+
+         String titulo = terminos.get(0);
+         String autor = terminos.get(1);
+         String isbn = terminos.get(2);
+         String añoPublicacion = terminos.get(3);
+
+         boolean encontrado = false;
+
+        for(Libro libro : libros)
+        {
+
+             if(coinciden(titulo, libro.getTitulo()) &&
+                coinciden(autor, libro.getAutor()) &&
+                coinciden(isbn, libro.getIsbn()) &&
+                coinciden(añoPublicacion, String.valueOf(libro.getAñoPublicacion())))
+             {
+
+                encontrado = true;
+                System.out.println(libro);
+
+            }
+
+        }
+
+        if(!encontrado) System.out.println("Libro no encontrado.");
+
+
+    }
+
+    //comprueba las coincidencias
+    private static boolean coinciden(String valor, String valorLibro)
+    {
+
+        return valor.isEmpty() || valor.equalsIgnoreCase(valorLibro);
+
+    }
+
     public List<Libro> getLibros() {
         return new ArrayList<>(libros);
     }
@@ -97,4 +136,5 @@ public class BibliotecaServicio {
     public List<Prestamo> getPrestamos() {
         return new ArrayList<>(prestamos);
     }
+
 }
