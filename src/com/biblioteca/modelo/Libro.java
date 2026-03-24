@@ -1,5 +1,7 @@
 package com.biblioteca.modelo;
+
 import java.util.ArrayList;
+import java.util.Scanner;
 
 /**
  * Representa un libro en el sistema de biblioteca
@@ -16,7 +18,6 @@ public class Libro {
     private ArrayList<String> comentarios = new ArrayList<>();
     private ArrayList<Calificacion> calificaciones = new ArrayList<>();
 
-
     public Libro(String titulo, String autor, String isbn, int añoPublicacion) {
         this.titulo = titulo;
         this.autor = autor;
@@ -25,6 +26,7 @@ public class Libro {
         this.disponible = true;
     }
 
+    // --- Métodos de calificación ---
     public void agregarCalificacion(Calificacion calificacion) {
         calificaciones.add(calificacion);
     }
@@ -48,51 +50,74 @@ public class Libro {
         }
     }
 
+    // --- Métodos de validación de ISBN (upstream) ---
+    public static String validarIsbn(Scanner sc) {
+        String isbn;
 
-    // Getters y Setters
+        while (true) {
+            isbn = sc.nextLine();
+            String isbnLimpio = isbn.replace("-", "");
+
+            if (isbnLimpio.length() != 13) {
+                System.out.println("El código ISBN introducido debe tener exactamente trece dígitos.");
+                continue;
+            }
+
+            if (!isbnLimpio.matches("\\d{13}")) {
+                System.out.println("El ISBN solo puede contener valores numéricos y la separación por guiones es opcional");
+                continue;
+            }
+
+            return isbn;
+        }
+    }
+
+    // --- Getters y Setters ---
     public String getTitulo() {
         return titulo;
     }
-    
+
     public void setTitulo(String titulo) {
         this.titulo = titulo;
     }
-    
+
     public String getAutor() {
         return autor;
     }
-    
+
     public void setAutor(String autor) {
         this.autor = autor;
     }
-    
+
     public String getIsbn() {
         return isbn;
     }
-    
+
     public void setIsbn(String isbn) {
         this.isbn = isbn;
     }
-    
+
     public int getAñoPublicacion() {
         return añoPublicacion;
     }
-    
+
     public void setAñoPublicacion(int añoPublicacion) {
         this.añoPublicacion = añoPublicacion;
     }
-    
+
     public boolean isDisponible() {
         return disponible;
     }
-    
+
     public void setDisponible(boolean disponible) {
         this.disponible = disponible;
     }
-    
+
     @Override
     public String toString() {
-        return String.format("Libro: %s | Autor: %s | ISBN: %s | Año: %d | Disponible: %s",
-                titulo, autor, isbn, añoPublicacion, disponible ? "Sí" : "No");
+        return String.format(
+                "Libro: %s | Autor: %s | ISBN: %s | Año: %d | Disponible: %s",
+                titulo, autor, isbn, añoPublicacion, disponible ? "Sí" : "No"
+        );
     }
 }
