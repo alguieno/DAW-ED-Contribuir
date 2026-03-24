@@ -158,4 +158,4 @@ public class BibliotecaApp {
             System.out.println("No se pudo eliminar el libro (puede tener préstamos activos o no existir).");
         }
     }
-}
+}nfgnfgn
