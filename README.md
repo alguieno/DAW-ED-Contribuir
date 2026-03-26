@@ -46,6 +46,10 @@ javac -d bin src/com/biblioteca/**/*.java src/com/biblioteca/*.java
 java -cp bin com.biblioteca.BibliotecaApp
 ```
 
+#### Correr en Netbeans
+
+Corre la aplicación en Netbeans abriendo el archivo de BibliotecaApp.java y dándole a Run > Run File.
+
 ## Estructura del Proyecto
 
 ```
